@@ -7,6 +7,14 @@ import TrackerReact from "meteor/ultimatejs:tracker-react";
 Proyectos = new Mongo.Collection("proyectos");
 
 export default class App extends TrackerReact(Component) {
+  constructor(){
+    super();
+    this.stata={
+      subsciption: {
+        proyectos: Meteor.subscribe("allProyectos")
+      }
+    }
+  }
 
   proyectos () {
     return Proyectos.find().fetch();
@@ -32,8 +40,8 @@ export default class App extends TrackerReact(Component) {
           <div>
             <h2>Proyects</h2>
             <ul>
-              {this.proyectos().map( (proyecto)=>{
-                return <SimpleProyect proyecto={proyecto} />
+              {this.proyectos().map( (proyecto,i)=>{
+                return <SimpleProyect proyecto={proyecto} key={proyecto._id}/>
               })}
             </ul>
           </div>

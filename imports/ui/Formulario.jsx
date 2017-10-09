@@ -9,19 +9,12 @@ class Formulario extends Component{
 		var mem2 = this.refs.miem2.value.trim();
 		var url = this.refs.url.value.trim();
 
-		Proyectos.insert({
-			text: text,
-			member1: mem1,
-			member2: mem2,
-			url: url,
-			createdAt: new Date(),
-			score: 0
+		Meteor.call('addProyect', text, mem1,mem2, url, ()=>{
+			this.refs.proyecto.value="";
+			this.refs.miem1.value="";
+			this.refs.miem2.value="";
+			this.refs.url.value="";	
 		});
-
-		this.refs.proyecto.value="";
-		this.refs.miem1.value="";
-		this.refs.miem2.value="";
-		this.refs.url.value="";
 
 		console.log(text+ " created");
 	}
